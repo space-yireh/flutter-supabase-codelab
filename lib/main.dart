@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_supabse_codelab/common/environment.dart';
 import 'package:flutter_supabse_codelab/pages/account_page.dart';
 import 'package:flutter_supabse_codelab/pages/login_page.dart';
 import 'package:flutter_supabse_codelab/pages/splash_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: Environment.fileName);
+
   //  supabase - initialize
 
   runApp(const MyApp());

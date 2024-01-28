@@ -11,6 +11,7 @@ class _AccountPageState extends State<AccountPage> {
   bool _loading = false;
   final _usernameController = TextEditingController();
   final _websiteController = TextEditingController();
+  String? _avatarUrl;
 
   Future<void> _getProfile() async {
     setState(() {
