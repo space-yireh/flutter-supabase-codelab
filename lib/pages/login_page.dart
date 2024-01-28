@@ -1,4 +1,9 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_supabse_codelab/main.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _redirecting = false;
   late final TextEditingController _emailController = TextEditingController();
   //  supabase - subscribe
+  late final StreamSubscription<AuthState> _authStateSubscription;
 
   Future<void> _signIn() async {
     try {
@@ -20,6 +26,22 @@ class _LoginPageState extends State<LoginPage> {
       });
 
       //  supabase - sign in
+      await supabase.auth.signInWithOtp(
+        email: _emailController.text.trim(),
+        emailRedirectTo:
+            kIsWeb ? null : 'io.supabase.flutterquickstart://login-callback/',
+      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Check your email for a login link!')),
+        );
+        _emailController.clear();
+      }
+    } on AuthException catch (error) {
+      SnackBar(
+        content: Text(error.message),
+        backgroundColor: Theme.of(context).colorScheme.error,
+      );
     } catch (e) {
       SnackBar(
         content: Text('Unexpected error: $e'),
@@ -37,12 +59,22 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     //  supabase - subscribe
+    _authStateSubscription = supabase.auth.onAuthStateChange.listen((data) {
+      if (_redirecting) return;
+      final session = data.session;
+      if (session != null) {
+        _redirecting = true;
+        Navigator.of(context).pushReplacementNamed('/account');
+      }
+    });
+
     super.initState();
   }
 
   @override
   void dispose() {
     //  supabse - unsubscribe
+    _authStateSubscription.cancel();
     _emailController.dispose();
     super.dispose();
   }
