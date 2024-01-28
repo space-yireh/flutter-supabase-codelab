@@ -69,6 +69,30 @@ class _AccountPageState extends State<AccountPage> {
     }
   }
 
+  Future<void> _onUpload(String imageUrl) async {
+    try {
+      // supabase - update avatar
+
+      if (mounted) {
+        const SnackBar(
+          content: Text('Successfully updated avatar!'),
+        );
+      }
+    } catch (e) {
+      SnackBar(
+        content: Text('Unexpected error: $e'),
+        backgroundColor: Theme.of(context).colorScheme.error,
+      );
+    }
+
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      //  supabase - imageUrl
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -91,6 +115,8 @@ class _AccountPageState extends State<AccountPage> {
             : ListView(
                 padding: const EdgeInsets.all(16),
                 children: [
+                  // supabase - avatar
+
                   TextFormField(
                     controller: _usernameController,
                     decoration: const InputDecoration(

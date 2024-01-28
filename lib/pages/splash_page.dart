@@ -25,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> _redirect() async {
     await Future.delayed(Duration.zero);
-    if (mounted) {
+    if (!mounted) {
       return;
     }
 
