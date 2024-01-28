@@ -102,12 +102,10 @@ create policy "Anyone can update their own avatar." on storage.objects
 - android는 `android/app/src/main/AndroidManifest.xml` 파일에 아래 코드를 추가합니다.
 ``` xml
 <manifest ...>
-  <!-- ... other tags -->
   <application ...>
     <activity ...>
-      <!-- ... other tags -->
-
-      <!-- Add this intent-filter for Deep Links -->
+...
+      <!-- supabase deeplink  -->
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -124,12 +122,10 @@ create policy "Anyone can update their own avatar." on storage.objects
 ```
 - iOS 는 `ios/Runner/Info.plist` 에 아래 코드를 추가합니다.
 ``` xml
-<!-- ... other tags -->
 <plist>
 <dict>
-  <!-- ... other tags -->
-
-  <!-- Add this array for Deep Links -->
+...
+	<!-- supabase deeplink  -->
   <key>CFBundleURLTypes</key>
   <array>
     <dict>
@@ -141,7 +137,7 @@ create policy "Anyone can update their own avatar." on storage.objects
       </array>
     </dict>
   </array>
-  <!-- ... other tags -->
+...  
 </dict>
 </plist>
 ```
@@ -152,8 +148,7 @@ create policy "Anyone can update their own avatar." on storage.objects
 ```
 flutter pub add supabase_flutter
 ```
-- `.env`파일을 복사하여 `.env.development`파일을 만듭니다.
-  * Dashboard의 `Settings > API`에서 API 정보를 참고하여 URL, KEY를 입력합니다.
+- `.env`파일을 복사하여 `.env.development`파일을 만들고, Dashboard의 `Settings > API`에서 API 정보를 참고하여 URL, KEY를 입력합니다.
 
 <img src="./doc/code-1.png">
 
@@ -366,8 +361,6 @@ flutter pub add image_picker
 - account_page.dart에 Avatar 위젯을 추가하고 업로드된 이미지 정보를 저장합니다.
 ```dart
 class _AccountPageState extends State<AccountPage> {
-...
-  String? _avatarUrl;
 ...
   Future<void> _getProfile() async {
 ...
