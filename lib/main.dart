@@ -3,7 +3,8 @@ import 'package:flutter_supabse_codelab/pages/account_page.dart';
 import 'package:flutter_supabse_codelab/pages/login_page.dart';
 import 'package:flutter_supabse_codelab/pages/splash_page.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   //  supabase - initialize
 
   runApp(const MyApp());
