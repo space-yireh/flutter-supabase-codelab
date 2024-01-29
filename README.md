@@ -2,6 +2,8 @@
 
 Flutter에서 Supabase를 빠르게 실습하기 위한 코드랩 입니다.
 
+<img src="./doc/ss.gif" width="30%" height="30%">
+
 - supabase의 예제를 가지고 실습형태로 만들어 봤습니다.
     - 원본 예제: [Build a User Management App with Fltter](https://supabase.com/docs/guides/getting-started/tutorials/with-flutter)
     - 본 실습의 완성 코드는  [complete](https://github.com/space-yireh/fultter-supabase-codelab/tree/complete) 브랜치 를 참고해주세요
