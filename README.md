@@ -1,10 +1,10 @@
 # Flutter Supbase Codelab
 
-Flutter에서 Supabase를 빠르게 배우기 위한 코드랩 입니다.
+Flutter에서 Supabase를 빠르게 실습하기 위한 코드랩 입니다.
 
 - supabase의 예제를 가지고 실습형태로 만들어 봤습니다.
     - 원본 예제: [Build a User Management App with Fltter](https://supabase.com/docs/guides/getting-started/tutorials/with-flutter)
-    - 본 실습의 완성 코드는  [complete](https://github.com/space-yireh/fultter-supabase-codelab/tree/compelete) 브랜치 를 참고해주세요
+    - 본 실습의 완성 코드는  [complete](https://github.com/space-yireh/fultter-supabase-codelab/tree/complete) 브랜치 를 참고해주세요
 - 본 실습에서는 아래 3가지를 주로 다룹니다.
     - Authentication - Email 로 전달된 링크를 통한 인증처리
     - Database - 간단한 CRU 처리
@@ -148,9 +148,11 @@ create policy "Anyone can update their own avatar." on storage.objects
 ```
 flutter pub add supabase_flutter
 ```
-- `.env`파일을 복사하여 `.env.development`파일을 만들고, Dashboard의 `Settings > API`에서 API 정보를 참고하여 URL, KEY를 입력합니다.
+- Dashboard의 `Settings > API`에서 API 정보를 참고하여 URL, KEY를 복사합니다.
 
 <img src="./doc/code-1.png">
+
+- `.env`파일을 복사하여 `.env.development`파일을 만들고, Dashboard에서 복사한 URL, KEY를 입력합니다.
 
 ```ini
 SUPABASE_URL='https://qjoxi~~~.supabase.co'
@@ -193,7 +195,7 @@ final supabase = Supabase.instance.client;
 ```
 
 ### 3. 로그인 처리 
-- 화면 진입할때 인증처리의 결과를 전달하는 리스너를 등록합니다.
+- `lib/pages/login_page.dart` 화면 진입할때 인증처리의 결과를 전달하는 리스너를 등록합니다.
 ```dart
 class _LoginPageState extends State<LoginPage> {
 ...
@@ -246,7 +248,7 @@ class _LoginPageState extends State<LoginPage> {
 - 인증메일의 링크를 클릭하면 Deep link를 통해 App이 실행되고 인증처리가 완료됩니다.
 
 ### 4. Profile 조회 및 입력 처리
-- 화면 진입하면서 `Profiles` 테이블을 조회하고, 입력항목에 바인딩처리를 합니다.
+- `lib/pages/account_page.dart` 화면 진입하면서 `Profiles` 테이블을 조회하고, Username, Website의 값을 바인딩처리를 합니다.
 ```dart
   Future<void> _getProfile() async {
 ...
@@ -266,7 +268,7 @@ class _LoginPageState extends State<LoginPage> {
 ...     
   }
 ```
-- `Update`버튼을 클릭하면 입력된 정보를 `Profiles` 테이블에 업데이트 합니다.
+- `Update`버튼을 클릭하면 Username,Webiste에 입력된 정보를 `Profiles` 테이블에 업데이트 합니다.
 ```dart
   Future<void> _updateProfile() async {
 ...
@@ -317,7 +319,7 @@ class _LoginPageState extends State<LoginPage> {
 ```
 flutter pub add image_picker
 ```
-- avatar.dart 파일에 선택한 이미지를 업로드 처리를 추가합니다.
+- `lib/components/avatar.dart` 파일에 선택한 이미지를 업로드 처리를 추가합니다.
 ```dart
   Future<void> _upload() async {
     //  supabase - imagePicker
@@ -358,7 +360,7 @@ flutter pub add image_picker
 ...
   }
 ```
-- account_page.dart에 Avatar 위젯을 추가하고 업로드된 이미지 정보를 저장합니다.
+- `lib/pages/account_page.dart` 에 Avatar 위젯을 추가하고 업로드된 이미지 정보를 저장합니다.
 ```dart
 class _AccountPageState extends State<AccountPage> {
 ...
@@ -405,3 +407,4 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 ```
+
